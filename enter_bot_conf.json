@@ -1,0 +1,59 @@
+{
+    "uuid": "95d647b7-b644-4872-bd5f-df793be23486",
+    "name": "思维模型-入口",
+    "summary": "",
+    "type": "EXPERT",
+    "defaultAnswer": "",
+    "botClassNameList": [
+        "com.yt.apps.taotie.bot.PostBot",
+        "com.yt.apps.taotie.bot.OpenAiPromptBuildBot",
+        "com.yt.apps.taotie.bot.OpenAiChatCompletionBot"
+    ],
+    "botConfList": [
+        {
+            "url": "http://cpaddon.yotouch.com/mental_model/process",
+            "name": "思维模型-入口",
+            "timeout": 600
+        },
+        {
+            "tpl": [
+                {
+                  "role": "user",
+                  "content": "||BACKGROUND||"
+                },
+                {
+                  "role": "user",
+                  "content": "||HISTORY_QUESTION||"
+                },
+                {
+                  "role": "assistant",
+                  "content": "||HISTORY_ANSWER||"
+                },
+                {
+                  "role": "user",
+                  "content": "||HISTORY_QUESTION||"
+                },
+                {
+                  "role": "assistant",
+                  "content": "||HISTORY_ANSWER||"
+                },
+                {
+                  "role": "user",
+                  "content": "||CONTENT||"
+                },
+                {
+                  "role": "user",
+                  "content": "||PROMPT||"
+                },
+                {
+                  "role": "user",
+                  "content": "||QUESTION||"
+                }
+              ]
+        },
+        {
+        }
+    ],
+    "prompt": "Please tell the user which Mental Model used directly, and please answer user's question in Chinese",
+    "background": "You are an export of Mental Model, you may have a lot of knowledge about Mental Model. \n    You can also easily find the answer of the question from your knowledge base.\n    I have some question related content to help you answer user's question, "
+}
