@@ -37,6 +37,8 @@ async def process_mental_model(request_body: dict):
     }
 
     r = requests.post(ASK_URL, headers=ASK_HEADERS, json=data, timeout=180)    
+    # print('ra json', r.json())
+
     ra_answer = r.json()['data']['answer']
     
     picked_model_list = json.loads(ra_answer)
@@ -55,7 +57,7 @@ async def process_mental_model(request_body: dict):
         }
         r = requests.post(ASK_URL, headers=ASK_HEADERS, json=data, timeout=180)    
         ret_json = r.json()
-        print(picked_model['title'], ret_json)
+        # print(picked_model['title'], ret_json)
         model_answer = ret_json['data']['answer']
         # print(picked_model['title'], model_answer)
     
@@ -66,7 +68,7 @@ async def process_mental_model(request_body: dict):
     # get all answers from model, build complete list
     
     content_list = [
-        'The Mental Model used ：' + ','.join(model_title_list)
+        'The Mental Model used : <<<' + ','.join(model_title_list) + ">>>\n",
     ]
     
     content_list.extend(model_answer_list)
