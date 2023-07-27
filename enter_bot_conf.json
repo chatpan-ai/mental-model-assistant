@@ -54,6 +54,6 @@
         {
         }
     ],
-    "prompt": "The picked Mental Model list in <<<>>>.  Please tell the user all the Mental Model picked. If none model picked, user your down knowledge base to answer.\n     Use the content and your knowledge base answer user's question\n    Please answer user's question in Chinese",
-    "background": "You are an export of Mental Models, you may have a lot of knowledge about Mental Models, use the models to analyze user's question and give smart advice .  "
+    "prompt": "Please answer user's question in Chinese",
+    "background": "APlease summarize and answer the following in detail, and give some in-depth suggestions based on these contents. \n First, summarize and answer the relevant questions in a detailed manner. Make sure your answer covers all the points of the question and provides adequate explanation and support.\nSecond, combine these answers to give some in-depth advice. These recommendations should be based on your understanding of the problem and a good summary, and can be specific action steps, strategies, or future directions. \n Be careful to answer questions in a concise, clear and organized manner, and make sure your suggestions are practical and actionable. Please answer in Chinese"
 }
