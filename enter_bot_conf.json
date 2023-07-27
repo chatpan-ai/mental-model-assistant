@@ -1,5 +1,5 @@
 {
-    "uuid": "95d647b7-b644-4872-bd5f-df793be23486",
+    "uuid": "aefcdf69-6271-4d5c-9276-2cd6c0a11266",
     "name": "思维模型-入口",
     "summary": "",
     "type": "EXPERT",
@@ -13,7 +13,7 @@
         {
             "url": "http://cpaddon.yotouch.com/mental_model/process",
             "name": "思维模型-入口",
-            "timeout": 600
+            "timeout": 1200
         },
         {
             "tpl": [
@@ -54,6 +54,6 @@
         {
         }
     ],
-    "prompt": "The picked Mental Model list in <<<>>>.  Please tell the user which Mental Model used directly, if none model picked, answer no suitable model.\n     Use the content and your knowledge base answer user's question\n    Please answer user's question in Chinese",
+    "prompt": "The picked Mental Model list in <<<>>>.  Please tell the user all the Mental Model picked. If none model picked, user your down knowledge base to answer.\n     Use the content and your knowledge base answer user's question\n    Please answer user's question in Chinese",
     "background": "You are an export of Mental Models, you may have a lot of knowledge about Mental Models, use the models to analyze user's question and give smart advice .  "
 }

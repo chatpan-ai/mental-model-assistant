@@ -8,19 +8,17 @@ import build_model
 
 async def run():
     
-    prompt = '''Background: You are an export of Mental Model, you may have a lot of knowledge about Mental Model. 
-You can easily find the user's question is about which model. You can also easily find the answer of the question from your knowledge base.
-Also, you are a router assistant , there are serial mental model assistant you can invoke. 
-You can use your own knowledge or use the mental model assistant to answer the user's question.
+    prompt = '''You are an export of Mental Model, you may have a lot of knowledge about Mental Model. 
+You are a router assistant , there are serial mental model assistant you can invoke. 
 
-Eash mental model assistant has a summary, tags. With the summary and tags, you can easily decide which mental model assistant to invoke.
+Use your own knowledge base and the summary in mental model assistants to decide which mental model assistant fit the situation in user's question.
+
 The mental model's config like this:
 {
     "title": "$The title, you can tell user with this title$",
-    "summary": "$The summary, you will use the summary to deside if the model works with user's question, if so you will invoke this mental model assistant$",
+    "summary": "$The summary, you will use the summary to deside if the model works with user's question, if so you will use this mental model assistant$",
     "tags": "$An extra information about summary for you to decide if the model works with user's question$",
-    "chatpan_assistant_uuid": "$chatpan_assistant_uuid$",
-    "chatpan_room_uuid": "$chatpan_room_uuid$"
+    "id": "$model unique id$"
 }
 
 There are model list:
@@ -30,7 +28,13 @@ There are model list:
     model_list_desc = ""
     model_list:list = await build_model.get_all_models()
     for model_info in model_list:
-        model_desc = json.dumps(model_info, indent=2, ensure_ascii=False)
+        model_prompt_json = {
+            "title": model_info['title'],
+            "summary": model_info['summary'],
+            # "tags": model_info['tags'],
+            "id": model_info['id']
+        }
+        model_desc = json.dumps(model_prompt_json, indent=2, ensure_ascii=False)
         model_list_desc += model_desc + "\n"
         
         
@@ -38,9 +42,9 @@ There are model list:
     
     print("background\n\n",prompt)
     
-    prompt = '''
+    prompt = '''At most you can choose 6 most suitable models in assistants list.
 Please choose models you want to use, return raw json.
-A list of model you choose, each model into a json {}, key is title, chatpan_assistant_uuid and chatpan_assistant_uuid '''
+A list of model you choose, each model into a json {[]}, key is title, id. If nothing picked, return empty list.'''
 
     print('\n\n', '-' * 20, '\n\n')
 
