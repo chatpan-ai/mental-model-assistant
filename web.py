@@ -18,6 +18,7 @@ RA_ASS_UUID = '6ccea77c-2116-4bf1-830a-e739c30bddc2'
 
 CP_HOST = 'https://chatpan.ai'
 ASK_URL = f"{CP_HOST}/api/v1/ask"
+MULTI_ASK_URL = f"{CP_HOST}/api/v1/multiAsk"
 ASK_HEADERS = {
     'accept': 'application/json',
     'Content-Type': 'application/json',
@@ -71,8 +72,11 @@ async def process_mental_model(request_body: dict):
 
     model_title_list = []
     model_answer_list = []
+    ask_data_list = []
     for picked_model in picked_model_list:
         print(f"Get answer from model {picked_model['title']} id:{picked_model['id']}")
+        
+        model_title_list.append(picked_model['title'])
         
         model_id = picked_model['id']
         if model_id not in model_dict:
@@ -86,18 +90,18 @@ async def process_mental_model(request_body: dict):
             'question': q
         }
         
-        time_s = time.time()
-        r = requests.post(ASK_URL, headers=ASK_HEADERS, json=data, timeout=600)    
-        time_e = time.time()
-        print(f"Get answer from model {picked_model['title']} id:{picked_model['id']} cost {time_e - time_s} seconds")
-        ret_json = r.json()
-        # print(picked_model['title'], ret_json)
-        model_answer = ret_json['data']['answer']
-        # print(picked_model['title'], model_answer)
+        ask_data_list.append(data)
     
-        model_title_list.append(picked_model['title'])
-        model_answer_list.append(model_answer)
+        
+    time_s = time.time()
+    r = requests.post(MULTI_ASK_URL, headers=ASK_HEADERS, data=json.dumps(ask_data_list), timeout=600)    
+    time_e = time.time()
+    print(f"⚙ Get answer from all model cost {time_e - time_s} seconds")
+    ret_json = r.json()
+    print('ALL -> ', ret_json)
     
+    answer_data_list = ret_json['data']
+    model_answer_list = [answer_data['answer'] for answer_data in answer_data_list]
     
     # get all answers from model, build complete list
     
